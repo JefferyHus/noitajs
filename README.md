@@ -14,7 +14,7 @@ You can create your own animations and chose to repeat it after a time you pick,
 
 Options
 ----------
-```json
+```javascript
 {
 	repeat: false,
 	repeatDelay: 300,
