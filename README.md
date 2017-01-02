@@ -41,4 +41,6 @@ You can set a callback function that will replace the `complete` function, this 
 
 Example
 ----------
+```javascript
 $('.elem').noita({properties: {'right':"+=1"}, duration: 5, timing: 'm', repeat: true, repeatDelay: 5000, repeatProps: {'display': none}});
+```
