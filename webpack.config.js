@@ -18,6 +18,14 @@
         },
         resolve: {
             extensions: ['', '.js', '.ts']
-        }
+        },
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                },
+                sourceMap: false
+            })
+        ]
     }
 }
