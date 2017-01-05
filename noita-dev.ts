@@ -1,18 +1,18 @@
-import _ from "lodash";
+import * as _ from "lodash";
 
 // create a new class
 export class noita {
     // set the default variables
-    settings: _sobject;
+    settings: sobject;
 
     constructor (options) {
-        _.extend(this.settings, options);
+        _.assign(this.settings, options);
     }
 
 }
 
 // separate the settings object for a clean changes
-interface _sobject{
+interface sobject{
     repeat: false;
     repeatDelay: 300;
     function: 'swing';
