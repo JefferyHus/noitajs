@@ -1,6 +1,6 @@
 machine:
     node:
-        version: 0.10
+        version: v0.10
 dependencies:
     pre:
         - "npm install"
@@ -8,3 +8,6 @@ dependencies:
         - "~/.npm"
     override:
         - npm -g install npm@latest
+checkout:
+    post:
+        - git checkout 1.0.1-alpha
