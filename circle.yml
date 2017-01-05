@@ -1,0 +1,10 @@
+machine:
+    node:
+        version: 0.10
+dependencies:
+    pre:
+        - "npm install"
+    cache_directories:
+        - "~/.npm"
+    override:
+        - npm -g install npm@latest
