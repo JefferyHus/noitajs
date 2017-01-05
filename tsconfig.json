@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "target": "es5",
+        "noImplicitAny": false
+    },
+    "include": [
+        "./"
+    ],
+    "exclude": [
+        "./node_modules", "CachedData", "GPUCache", "Local Storage", "User"
+    ]
+}
