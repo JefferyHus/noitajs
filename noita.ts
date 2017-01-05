@@ -1,0 +1,1 @@
+import {noita} from "./noita-dev";
