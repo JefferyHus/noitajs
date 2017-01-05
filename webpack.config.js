@@ -1,7 +1,7 @@
 {
     const webpack = require("webpack");
     const path = require("path");
-
+    
     module.exports = {
         entry: {
             js: './noita-dev.ts'
@@ -12,8 +12,8 @@
         },
         module: {
             loaders: [
-                {test: /\.ts$/, loader: 'ts-loader', exclude: [/node_modules/, /typings/]},
-                {test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/, /typings/]}
+                {test: /\.ts$/, loader: 'babel-loader!ts-loader', exclude: [/node_modules/, /typings/]},
+                {test: /\.js$/, loader: 'babel-loader', query: {presets: ['es2015']}, exclude: [/node_modules/, /typings/]}
             ]
         },
         resolve: {

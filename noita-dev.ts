@@ -1,12 +1,12 @@
-import _ from "lodash";
+import * as _ from "lodash";
 
 // create a new class
-export class noita {
+export default class noita {
     // set the default variables
     settings: _sobject;
 
     constructor (options) {
-        _.extend(this.settings, options);
+        _.assign(this.settings, options);
     }
 
 }

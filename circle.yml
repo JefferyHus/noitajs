@@ -1,13 +1,9 @@
 machine:
     node:
-        version: v0.10
+        version: 0.10.22
 dependencies:
-    pre:
-        - "npm install"
-    cache_directories:
-        - "~/.npm"
     override:
-        - npm -g install npm@latest
+        - npm install --dev
 checkout:
     post:
         - git checkout 1.0.1-alpha
