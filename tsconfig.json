@@ -3,7 +3,10 @@
         "outDir": "./dist/",
         "sourceMap": true,
         "target": "es5",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "types": [
+            "node"
+        ]
     },
     "include": [
         "./"
