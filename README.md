@@ -3,6 +3,8 @@ This is a jQuery $.animate() plugin wrapper
 
 [![Build Status](https://travis-ci.org/JefferyHus/noitajs.svg?branch=1.0.1-alpha)](https://travis-ci.org/JefferyHus/noitajs)
 
+[![GitHub version](https://badge.fury.io/gh/JefferyHus%2Fnoitajs.svg)](https://badge.fury.io/gh/JefferyHus%2Fnoitajs)
+
 Description
 -----------
 This library is a wrapper for the actual $.animate() jQuery function, using Promises to fulfill request without bugs or front crashe.
