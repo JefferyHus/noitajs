@@ -40,13 +40,87 @@ export class animate {
                 // create the style string
                 var styleString = _.join(_.map(settings.properties, function(o, key) {return _.join([key, o], ':') ;}), ';');
                 // now affect the style into the element
+                styleString += ";transition: all " + settings.transition + " " + settings.duration + settings.timing;
                 elem.setAttribute('style', styleString);
-                elem.style.webkitTransition = "all " + settings.transition + " " + settings.duration + settings.timing;
+                // sleep for some time
+                let sleep = animate.prototype.await( animate.prototype.timing( settings.duration, settings.timing, "ms" ).time );
+                // fulfill the sleep promise
+                sleep.then(
+                    function () {
+                        console.log("done");
+                    }
+                );
             }
         );
 
     }
 
+    /* sleep promise es5 support */
+    await (duration:number) {
+        return new Promise( (resolve) => window.setTimeout(() => {
+            resolve();
+        }, duration) );
+    }
+    
+    /* convert the time to the exact duration */
+    timing (duration:number, from:string, to:string) {
+        // convert ms to a chosen timing unit
+        let mstounit = (n, unit:string) => {
+            switch (unit) {
+                case "s":
+                    n = Math.round(duration / 1000);
+                    break;
+                case "m":
+                    n = Math.round( (duration / 1000) / 60 );
+                    break;
+                default:
+                    break;
+            }
+
+            return n;
+        };
+        // convert s to unit
+        let stounit = (n, unit:string) => {
+            switch (unit) {
+                case "ms":
+                    n = Math.round(duration * 1000);
+                    break;
+                case "m":
+                    n = Math.round(duration / 60);
+                    break;
+                default:
+                    break;
+            }
+
+            return n;
+        };
+        // convert m to unit
+        let mtounit = (n, unit:string) => {
+            switch (unit) {
+                case "ms":
+                    n = Math.round( (duration * 60) * 1000 );
+                    break;
+                case "s":
+                    n = Math.round(duration * 60);
+                    break;
+                default:
+                    break;
+            }
+
+            return n;
+        };
+
+        // convert now the duration
+        if ( from === "ms" ) {
+            duration = mstounit(duration, to);
+        } else if ( from === "s" ) {
+            duration = stounit(duration, to);
+        } else if ( from === "m" ) {
+            duration = mtounit(duration, to);
+        }
+
+        return {time: duration, unit: to};
+    }
 }
 
 // separate the settings object for a clean changes

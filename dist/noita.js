@@ -87,9 +87,78 @@ var noita =
 	                return _.join([key, o], ':');
 	            }), ';');
 	            // now affect the style into the element
+	            styleString += ";transition: all " + settings.transition + " " + settings.duration + settings.timing;
 	            elem.setAttribute('style', styleString);
-	            elem.style.webkitTransition = "all " + settings.transition + " " + settings.duration + settings.timing;
+	            // sleep for some time
+	            var sleep = animate.prototype.await(animate.prototype.timing(settings.duration, settings.timing, "ms").time);
+	            // fulfill the sleep promise
+	            sleep.then(function () {
+	                console.log("done");
+	            });
 	        });
+	    };
+	    /* sleep promise es5 support */
+	    animate.prototype.await = function (duration) {
+	        console.log(duration);
+	        return new Promise(function (resolve) {
+	            return window.setTimeout(function () {
+	                resolve();
+	            }, duration);
+	        });
+	    };
+	    /* convert the time to the exact duration */
+	    animate.prototype.timing = function (duration, from, to) {
+	        // convert ms to a chosen timing unit
+	        var mstounit = function (n, unit) {
+	            switch (unit) {
+	                case "s":
+	                    n = Math.round(duration / 1000);
+	                    break;
+	                case "m":
+	                    n = Math.round(duration / 1000 / 60);
+	                    break;
+	                default:
+	                    break;
+	            }
+	            return n;
+	        };
+	        // convert s to unit
+	        var stounit = function (n, unit) {
+	            switch (unit) {
+	                case "ms":
+	                    n = Math.round(duration * 1000);
+	                    break;
+	                case "m":
+	                    n = Math.round(duration / 60);
+	                    break;
+	                default:
+	                    break;
+	            }
+	            return n;
+	        };
+	        // convert m to unit
+	        var mtounit = function (n, unit) {
+	            switch (unit) {
+	                case "ms":
+	                    n = Math.round(duration * 60 * 1000);
+	                    break;
+	                case "s":
+	                    n = Math.round(duration * 60);
+	                    break;
+	                default:
+	                    break;
+	            }
+	            return n;
+	        };
+	        // convert now the duration
+	        if (from === "ms") {
+	            duration = mstounit(duration, to);
+	        } else if (from === "s") {
+	            duration = stounit(duration, to);
+	        } else if (from === "m") {
+	            duration = mtounit(duration, to);
+	        }
+	        return { time: duration, unit: to };
 	    };
 	    return animate;
 	}();
