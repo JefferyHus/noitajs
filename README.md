@@ -1,6 +1,6 @@
 # noitajs
 
-[![Build Status](https://travis-ci.org/JefferyHus/noitajs.svg?branch=master)](https://travis-ci.org/JefferyHus/noitajs) [![npm version](https://badge.fury.io/js/noitajs.svg)](https://badge.fury.io/js/noitajs) ![GitHub release](https://img.shields.io/badge/release-1.0.1--alpha-blue.svg)
+[![Build Status](https://travis-ci.org/JefferyHus/noitajs.svg?branch=master)](https://travis-ci.org/JefferyHus/noitajs) [![npm version](https://badge.fury.io/js/noitajs.svg)](https://badge.fury.io/js/noitajs) ![GitHub release](https://img.shields.io/badge/release-1.0.1-blue.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-red.svg)](https://raw.githubusercontent.com/JefferyHus/noitajs/master/LICENSE)
 
 Description
 -----------
