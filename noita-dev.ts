@@ -41,13 +41,20 @@ export class animate {
                 var styleString = _.join(_.map(settings.properties, function(o, key) {return _.join([key, o], ':') ;}), ';');
                 // now affect the style into the element
                 styleString += ";transition: all " + settings.transition + " " + settings.duration + settings.timing;
+                // start the animation
                 elem.setAttribute('style', styleString);
                 // sleep for some time
                 let sleep = animate.prototype.await( animate.prototype.timing( settings.duration, settings.timing, "ms" ).time );
                 // fulfill the sleep promise
                 sleep.then(
-                    function () {
-                        console.log("done");
+                    function (value)
+                    {
+                        //
+                    }
+                ).catch(
+                    function (error)
+                    {
+                        console.error(error);
                     }
                 );
             }
@@ -57,8 +64,16 @@ export class animate {
 
     /* sleep promise es5 support */
     await (duration:number) {
-        return new Promise( (resolve) => window.setTimeout(() => {
-            resolve();
+        return new Promise( (resolve, reject) => window.setTimeout(() => {
+            // if the browser is IE then just return a catchable error
+            if ( navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) )
+            {
+                reject( new Error("You are using IE, this browser is not supported by Noita Animation prototype, please wait until a new version is out to fix the problem.") );
+            }
+            else
+            {
+                resolve();
+            }
         }, duration) );
     }
     

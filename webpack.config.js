@@ -4,29 +4,39 @@
 
     module.exports = {
         entry: {
-            js: './noita-dev.ts'
+            noita: './noita-dev.ts'
         },
         output: {
-            path: './dist',
+            path: path.resolve(__dirname, './dist'),
             library: 'noita',
-            filename: 'noita.js'
+            filename: '[name].bundle.js'
+        },
+        devServer: {
+            contentBase: path.join(__dirname, "./"),
+            compress: true,
+            port: 9000
         },
         module: {
-            loaders: [
-                {test: /\.ts$/, loader: 'babel-loader!ts-loader', exclude: [/node_modules/, /typings/]},
+            rules: [
+                {test: /\.ts$/, use: ['babel-loader','ts-loader'], exclude: [/node_modules/, /typings/]},
                 {test: /jquery[\\\/]src[\\\/]selector\.js$/, loader: 'amd-define-factory-patcher-loader'},
-                {test: /\.js$/, loader: 'babel-loader', query: {presets: ['es2015']}, exclude: [/node_modules/, /typings/]}
+                {test: /\.js$/, loader: 'babel-loader', options: {presets: ['es2015']}, exclude: [/node_modules/, /typings/]}
             ]
         },
         resolve: {
-            extensions: ['', '.js', '.ts']
+            extensions: ['.js', '.ts'],
+            enforceExtension: false
         }/*,
+        devtool: "source-map",
         plugins: [
-            new webpack.optimize.UglifyJsPlugin({
+            new UglifyJsPlugin({
                 compress: {
-                    warnings: false
+                    warnings: true
                 },
-                sourceMap: false
+                sourceMap: true
+            })
+            new webpack.LoaderOptionsPlugin({
+                minimize: true
             })
         ]*/
     }
