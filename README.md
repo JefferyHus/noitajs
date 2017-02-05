@@ -1,5 +1,6 @@
 # noitajs
-This is a jQuery $.animate() plugin wrapper
+
+[![Build Status](https://travis-ci.org/JefferyHus/noitajs.svg?branch=1.0.1-alpha)](https://travis-ci.org/JefferyHus/noitajs) [![npm version](https://badge.fury.io/js/noitajs.svg)](https://badge.fury.io/js/noitajs) ![GitHub release](https://img.shields.io/badge/release-1.0.1--alpha-blue.svg)
 
 Description
 -----------
