@@ -18,16 +18,20 @@ export class animate {
 
     // init the prototype
     constructor (options: sobject) {
+        // firs of all check if any callback has been set
+        // if one found then call it once the promise has finished
+        let args     = Array.prototype.slice.call(arguments, 1);
+        let callback = Array.prototype.shift.call(args);
         // prevent any extension on settings
         Object.preventExtensions(this.settings);
         // now check if any options are passed
         options ? _.assign(this.settings, options) : false;
         // then start the scope
-        animate.prototype.start( this.settings );
+        animate.prototype.start( this.settings, callback );
     }
 
     /* starts the animation process */
-    start (settings) {
+    start (settings, callback = undefined) {
         // check if this settings has any properties first
         if ( _.isEmpty(settings.properties) || !_.isObject(settings.properties) ) {
             throw new SyntaxError("You must provide a property object.");
@@ -49,12 +53,28 @@ export class animate {
                 sleep.then(
                     function (value)
                     {
-                        //
+                        // call the complete function
+                        if ( undefined == callback )
+                        {
+                            settings.complete.call(this, settings, null);
+                        }
+                        else if ( typeof callback === "function" )
+                        {
+                            callback.call(this, settings, null);
+                        }
                     }
                 ).catch(
                     function (error)
                     {
-                        console.error(error);
+                        // call the complete function
+                        if ( undefined == callback )
+                        {
+                            settings.complete.call(this, settings, error);
+                        }
+                        else if ( typeof callback === "function" )
+                        {
+                            callback.call(this, settings, error);
+                        }
                     }
                 );
             }
