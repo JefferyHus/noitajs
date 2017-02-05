@@ -1,5 +1,6 @@
 # noitajs
-This is a jQuery $.animate() plugin wrapper
+
+[![Build Status](https://travis-ci.org/JefferyHus/noitajs.svg?branch=1.0.1-alpha)](https://travis-ci.org/JefferyHus/noitajs) [![npm version](https://badge.fury.io/js/noitajs.svg)](https://badge.fury.io/js/noitajs) ![GitHub release](https://img.shields.io/badge/release-1.0.1--alpha-blue.svg)
 
 Description
 -----------
@@ -8,7 +9,7 @@ You can create your own animations and chose to repeat it after a time you pick,
 
 ```javascript
 (function($){
-  $('.elem').noita({options}, callback)
+  noita({options}, callback)
 })
 ```
 
@@ -27,6 +28,7 @@ Options
 	complete: function (settings, error) {}
 }
 ```
+`elem`: ID of the html element to animate (default: 'noita').
 `repeat`: either repeat or not the current animation (default: false).
 `repeatDelay`: when to repeat the next animatio, this property depends on the first one in case it is true (default: 300)
 `repeatProps`: in case you like to pick another animation effect to the element, if not set the first effect will be repeated
