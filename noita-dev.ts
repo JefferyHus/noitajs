@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 const Promise = require("es6-promise");
 
-// create a new class
+// create animation class
 export class animate {
     // set the default variables
     settings = {
@@ -18,16 +18,20 @@ export class animate {
 
     // init the prototype
     constructor (options: sobject) {
+        // first of all check if any callback has been set
+        // if one found then call it once the promise has finished
+        let args     = Array.prototype.slice.call(arguments, 1);
+        let callback = Array.prototype.shift.call(args);
         // prevent any extension on settings
         Object.preventExtensions(this.settings);
         // now check if any options are passed
         options ? _.assign(this.settings, options) : false;
         // then start the scope
-        animate.prototype.start( this.settings );
+        animate.prototype.start( this.settings, callback );
     }
 
     /* starts the animation process */
-    start (settings) {
+    start (settings, callback = undefined) {
         // check if this settings has any properties first
         if ( _.isEmpty(settings.properties) || !_.isObject(settings.properties) ) {
             throw new SyntaxError("You must provide a property object.");
@@ -49,12 +53,28 @@ export class animate {
                 sleep.then(
                     function (value)
                     {
-                        //
+                        // call the complete function
+                        if ( undefined == callback )
+                        {
+                            settings.complete.call(this, settings, null);
+                        }
+                        else if ( typeof callback === "function" )
+                        {
+                            callback.call(this, settings, null);
+                        }
                     }
                 ).catch(
                     function (error)
                     {
-                        console.error(error);
+                        // call the complete function
+                        if ( undefined == callback )
+                        {
+                            settings.complete.call(this, settings, error);
+                        }
+                        else if ( typeof callback === "function" )
+                        {
+                            callback.call(this, settings, error);
+                        }
                     }
                 );
             }
@@ -148,4 +168,37 @@ interface sobject{
     properties: Object;
     init: (elem:any) => {};
     complete: (settings:Object, error:any) => {};
+}
+
+
+// create the mouse class
+export class mouse {
+    // default options
+    settings = {
+        event: 'capture',
+        elem: 'document',
+        callback: function (elem) {}
+    };
+    // init prototype
+    constructor (options) {
+        // now check if any options are passed
+        options ? _.assign(this.settings, options) : false;
+    }
+
+    // capture the mouse mouvments
+    capture () {
+        var elem = undefined;
+        // if the chosen element is not document then we get the element from
+        // HTML DOM
+        if ( 'document' !== this.settings.elem )
+        {
+            elem = document.getElementById( this.settings.elem );
+        }
+        else
+        {
+            elem = document;
+        }
+        // now start the capturing
+        elem.mousemove = this.settings.callback (elem);
+    }
 }
