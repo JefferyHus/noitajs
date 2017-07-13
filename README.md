@@ -10,7 +10,7 @@ This library is a javascript DOM manipulation framework, for the moment the late
 
 NPM dependencies
 -----------------
-```javascript
+```console
 npm i --save-dev noitajs@1.0.1
 ```
 
@@ -37,18 +37,18 @@ Options
 }
 ```
 
-`elem`: ID of the DOM element to animate
-`repeat`: either repeat or not the current animation (default: false).
-`repeatDelay`: when to repeat the next animatio, this property depends on the first one in case it is true (default: 300)
-`repeatProps`: in case you like to pick another animation effect to the element, if not set the first effect will be repeated
-`function`: this is similar to $.animate property 'easing' (default: 'swing').
-`duration`: duration of the current promise.
-`timing`: duration unit could be either 'ms', 's' or 'm' (default: 'ms').
-`properties`: string/object containing the animation efects to be executed on the element.
-`init`: call this function if you want to interfer during the start of the promise.
-`complete`: called when the promise has ended, notice that this function is called after every animation if `repeat` is set to true.
+`elem`: ID of the DOM element to animate.<br />
+`repeat`: either repeat or not the current animation (default: false).<br />
+`repeatDelay`: when to repeat the next animatio, this property depends on the first one in case it is true (default: 300).<br />
+`repeatProps`: in case you like to pick another animation effect to the element, if not set the first effect will be repeated.<br />
+`function`: this is similar to $.animate property 'easing' (default: 'swing').<br />
+`duration`: duration of the current promise.<br />
+`timing`: duration unit could be either 'ms', 's' or 'm' (default: 'ms').<br />
+`properties`: string/object containing the animation efects to be executed on the element.<br />
+`init`: call this function if you want to interfer during the start of the promise.<br />
+`complete`: called when the promise has ended, notice that this function is called after every animation if `repeat` is set to true.<br />
 
-You can set a callback function that will replace the `complete` function, this callback will recieve the same attributes as the complete function.
+You can set a callback function that will replace the `complete` function, this callback will recieve the same attributes as the complete function.<br />
 
 Example
 ----------
